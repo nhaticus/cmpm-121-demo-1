@@ -12,5 +12,5 @@ app.append(header);
 
 const button = document.createElement("button");
 button.innerText = "▶️";
-button.style.backgroundColor = "red"
-app.append(button)
+button.style.backgroundColor = "red";
+app.append(button);
