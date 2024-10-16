@@ -8,7 +8,7 @@ document.title = gameName;
 //header
 const header = document.createElement("h1");
 header.innerHTML = gameName;
-header.style.color = "#FACADE";
+header.style.color = "white";
 app.append(header);
 
 //Adding button that will be doing the incrementing
@@ -18,22 +18,36 @@ button.style.backgroundColor = "red";
 app.append(button);
 
 //Adding counter
-let viewCounter: number = 0;
-const viewDisplay = document.createElement("div");  //Text display
-app.append(viewDisplay);
-viewDisplay.innerHTML = "VIEWS: " + viewCounter;
-button.addEventListener('click', () => {  //increment counter and update text on click
-  viewCounter++;
-  update();
-})
+let viewsCount: number = 0;
+const viewsDisplay = document.createElement("div"); //Text display
+app.append(viewsDisplay);
+viewsDisplay.innerHTML = "VIEWS: " + viewsCount;
+button.addEventListener("click", () => {
+  //increment counter and update text on click
+  incrementViewsCount(1);
+});
+
+// Helper function to increase the views count along with updating the text
+function incrementViewsCount(x: number): void {
+  viewsCount += x;
+  viewsDisplay.innerHTML = `VIEWS: ${viewsCount.toFixed(1)}`;
+}
 
 //Adding passive incrementing
-let passiveCounter: number = 1;
-setInterval(() => {
-  viewCounter += passiveCounter;
-  update();
-}, 1000);
+const counterGrowthRate: number = 1;
 
-function update() :void{
-  viewDisplay.innerHTML = "VIEWS: " + viewCounter;
+let lastTimeStamp: number = 0;
+function continuousGrowth(timeStamp: number): void {
+  if (lastTimeStamp === 0) {
+    lastTimeStamp = timeStamp;
+  }
+  const timeElapsed = timeStamp - lastTimeStamp;  //Time since last frame
+  const tmp = counterGrowthRate * timeElapsed / 1000; // tmp essentially equals to 1 / frame per sec
+  incrementViewsCount(tmp);
+  lastTimeStamp = timeStamp;
+  
+
+  requestAnimationFrame(continuousGrowth);  //Loop
 }
+requestAnimationFrame(continuousGrowth);  //Start the animation loop
+
