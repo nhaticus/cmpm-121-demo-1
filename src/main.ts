@@ -7,8 +7,10 @@ document.title = gameName;
 
 const header = document.createElement("h1");
 header.innerHTML = gameName;
+header.style.color = "#FACADE";
 app.append(header);
 
-header.style.color = "#FACADE"
-
-
+const button = document.createElement("button");
+button.innerText = "▶️";
+button.style.backgroundColor = "red"
+app.append(button)
