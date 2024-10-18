@@ -40,7 +40,7 @@ function incrementViewsCount(x: number): void {
 
 let counterGrowthRate: number = 0; //Default value should be 0
 const passiveGrowthDisplay = addText(
-  `VIEWS/SEC: ${counterGrowthRate.toFixed(2)}\n\n`
+  `VIEWS/SEC: ${counterGrowthRate.toFixed(2)}\n\n`,
 );
 
 function incrementRates(x: number): void {
@@ -75,7 +75,7 @@ interface Upgrade {
 // List of Upgrades
 const upgradeList: Upgrade[] = [
   { name: "Viewer(s)", cost: 10, rate: 0.1, level: 0 },
-  { name: "Fan(s)", cost: 100, rate: 2, level: 0 },
+  { name: "Subscriber(s)", cost: 100, rate: 2, level: 0 },
   { name: "Collaboration(s)", cost: 1000, rate: 50, level: 0 },
 ];
 
@@ -121,7 +121,7 @@ function handleUpgrade(upgrade: Upgrade) {
 function updateButtons(): void {
   upgradeList.forEach((upgrade, index) => {
     const button = document.getElementById(
-      `upgrade-${index}`
+      `upgrade-${index}`,
     ) as HTMLButtonElement;
     if (button) {
       button.innerText = `${upgrade.level} ${upgrade.name} - Cost: ${upgrade.cost.toFixed(2)}`;
