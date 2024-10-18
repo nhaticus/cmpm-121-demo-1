@@ -70,13 +70,16 @@ interface Upgrade {
   cost: number;
   rate: number;
   level: number;
+  description: string;
 }
 
 // List of Upgrades
 const upgradeList: Upgrade[] = [
-  { name: "Viewer(s)", cost: 10, rate: 0.1, level: 0 },
-  { name: "Subscriber(s)", cost: 100, rate: 2, level: 0 },
-  { name: "Collaboration(s)", cost: 1000, rate: 50, level: 0 },
+  { name: "Lurker(s)", cost: 10, rate: 0.1, level: 0, description: "WOW! an occasional viewer that watches once in a while"},
+  { name: "Subscriber(s)", cost: 100, rate: 2, level: 0, description: "Someone finds you interesting and kept watching... that's rare"},
+  { name: "Collaboration(s)", cost: 1000, rate: 50, level: 0, description: "A massive video collaboration with a famous STAR! look at those views!!! how did you land that" },
+  { name: "Superfan(s)", cost: 10000, rate: 1250,level: 0, description: "Grow a cult of devoted followers that eat, sleep, watch you, and repeat"},
+  { name: "Bot(s)", cost: 99999999.99, rate: 9999999999,level: 0, description: "Really bro... BOTS??? you really fell off"}
 ];
 
 // Function to create buttons for each upgrade
@@ -92,6 +95,7 @@ function createUpgradeButtons() {
       const button = document.createElement("button");
       button.innerText = `${upgrade.level} ${upgrade.name} - Cost: ${upgrade.cost}`;
       button.id = `upgrade-${index}`;
+      button.title = upgrade.description;
 
       // Add click event listener to handle button click
       button.addEventListener("click", () => {
