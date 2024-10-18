@@ -114,6 +114,7 @@ function createUpgradeButtons() {
 function handleUpgrade(upgrade: Upgrade) {
   incrementRates(upgrade.rate);
   incrementViewsCount(-upgrade.cost);
+  upgrade.cost = upgrade.cost * 1.15;
   upgrade.level++;
 }
 
@@ -124,7 +125,7 @@ function updateButtons(): void {
       `upgrade-${index}`
     ) as HTMLButtonElement;
     if (button) {
-      button.innerText = `${upgrade.level} ${upgrade.name} - Cost: ${upgrade.cost}`;
+      button.innerText = `${upgrade.level} ${upgrade.name} - Cost: ${upgrade.cost.toFixed(2)}`;
       button.disabled = viewsCount < upgrade.cost;
     }
   });
