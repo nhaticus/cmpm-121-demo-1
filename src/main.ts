@@ -103,7 +103,7 @@ function initGame(config: GameConfig) {
 
   viewsDisplay = addText(`\nVIEWS: ${viewsCount.toFixed(2)}\n`);
   passiveGrowthDisplay = addText(
-    `VIEWS/SEC: ${counterGrowthRate.toFixed(2)}\n\n`
+    `VIEWS/SEC: ${counterGrowthRate.toFixed(2)}\n\n`,
   );
 
   /*  CLICKER BUTTON FOR INCREMENTAL GAME */
@@ -207,7 +207,7 @@ function handleUpgrade(upgrade: Upgrade) {
 function updateButtons(): void {
   gameConfig.upgrades.forEach((upgrade, index) => {
     const button = document.getElementById(
-      `upgrade-${index}`
+      `upgrade-${index}`,
     ) as HTMLButtonElement;
     if (button) {
       button.innerText = `${upgrade.level} ${upgrade.name} - Cost: ${upgrade.cost.toFixed(2)}`;
