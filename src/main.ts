@@ -78,9 +78,8 @@ function createUpgradeButtons(config: GameConfig) {
 
       // Create a button for each upgrade
       const button = document.createElement("button");
-      button.innerText = `${upgrade.level} ${upgrade.name} - Cost: ${upgrade.cost}`;
+      button.innerHTML = displayUpgradeName(upgrade);
       button.id = `upgrade-${index}`;
-      button.title = upgrade.description;
 
       // Add click event listener to handle button click
       button.addEventListener("click", () => {
@@ -88,12 +87,12 @@ function createUpgradeButtons(config: GameConfig) {
       });
       upgradeContainer.appendChild(button);
 
-      const rateDisplay = document.createElement("p");
+      const rateDisplay = document.createElement("div");
       rateDisplay.innerText = `${upgrade.rate} Views/sec `;
       rateDisplay.style.color = gameConfig.styles.headerColor;
       upgradeContainer.appendChild(rateDisplay);
 
-      appDiv.appendChild(upgradeContainer);
+      app.append(upgradeContainer);
     });
   }
 }
@@ -113,7 +112,7 @@ function updateButtons(): void {
       `upgrade-${index}`
     ) as HTMLButtonElement;
     if (button) {
-      button.innerText = `${upgrade.level} ${upgrade.name} - Cost: ${upgrade.cost.toFixed(2)}`;
+      button.innerHTML = displayUpgradeName(upgrade);
       button.disabled = viewsCount < upgrade.cost;
     }
   });
@@ -230,7 +229,7 @@ function initGame(config: GameConfig) {
 
 initGame(gameConfig);
 
-/* COLOR CHANGING BACKGROUND INSPIRED BY https://scso-ucsc.github.io/Incremental-Game-Development/ */
+/* COLOR CHANGING BACKGROUND INSPIRED BY https://github.com/scso-ucsc/Incremental-Game-Development */
 
 function interpolateColor(
   startColor: number[],
@@ -253,8 +252,8 @@ function rgbToHex(r: number, g: number, b: number) {
   return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
-const color1 = [125, 0, 0];
-const color2 = [185, 0, 0];
+const color1 = [255, 105, 97]; // Light red
+const color2 = [139, 0, 0]; // Dark red
 let factor: number = 0;
 let direction: number = 1;
 
@@ -275,9 +274,9 @@ function animateBackground() {
 
 animateBackground();
 
-/* SHAKY TEXT INSPIRED BY https://scso-ucsc.github.io/Incremental-Game-Development/ */
+/* SHAKY TEXT INSPIRED BY https://github.com/scso-ucsc/Incremental-Game-Development */
 function shakeAnimation() {
-  angle += rotation * (speed);
+  angle += rotation * speed;
 
   if (angle > maxAngle || angle < -maxAngle) {
     rotation *= -1;
@@ -285,5 +284,13 @@ function shakeAnimation() {
 
   // Apply rotation to the element
   helperText.style.transform = `rotate(${angle}deg)`;
-      requestAnimationFrame(shakeAnimation);
+  requestAnimationFrame(shakeAnimation);
+}
+
+/* BUTTON DISPLAY TEXT BY https://github.com/6YuQing6/cat-fishing-cmpm121-demo1 */
+function displayUpgradeName(upgrade: Upgrade): string {
+  return `
+    <span class="item-info">${upgrade.level} ${upgrade.name} - Cost: ${upgrade.cost.toFixed(2)}</span><br/>
+    <span class="item-description">${upgrade.description}</span>
+  `;
 }
