@@ -26,11 +26,11 @@ interface GameConfig {
   };
 
   initialState: {
-    views: number,
-    growthRate: number,
-  }
+    views: number;
+    growthRate: number;
+  };
 
-  upgrades: Upgrade[]
+  upgrades: Upgrade[];
 }
 
 const gameConfig: GameConfig = {
@@ -102,13 +102,15 @@ function initGame(config: GameConfig) {
   counterGrowthRate = config.initialState.growthRate;
 
   viewsDisplay = addText(`\nVIEWS: ${viewsCount.toFixed(2)}\n`);
-  passiveGrowthDisplay = addText(`VIEWS/SEC: ${counterGrowthRate.toFixed(2)}\n\n`);
+  passiveGrowthDisplay = addText(
+    `VIEWS/SEC: ${counterGrowthRate.toFixed(2)}\n\n`
+  );
 
   /*  CLICKER BUTTON FOR INCREMENTAL GAME */
   createIncermentalButton("▶️", gameConfig);
 
   /*  UPGRADE BUTTONS FOR THE GAME */
-  createUpgradeButtons(config)
+  createUpgradeButtons(config);
 }
 
 initGame(gameConfig);
